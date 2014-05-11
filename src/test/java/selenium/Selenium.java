@@ -1,4 +1,4 @@
-package com.saisantoshiinfotech;
+package selenium;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
@@ -6,16 +6,17 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import selenium.Driver;
 
 
-public class SeleniumUtilities {
+public class Selenium {
 
     private WebDriver webDriver;
     private static final Integer WAIT_TIMEOUT = 30;
     private Logger logger = Logger.getLogger(getClass());
     private Actions action;
 
-    public SeleniumUtilities(final Driver webDriver) {
+    public Selenium(final Driver webDriver) {
         this.webDriver = webDriver;
         action = new Actions(webDriver);
     }

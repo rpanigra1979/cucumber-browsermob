@@ -1,4 +1,4 @@
-package HTTPArchive;
+package har;
 
 import com.google.gson.Gson;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HTTPArchiveHelper {
+public class HarHelper {
 
 //		private static String pageRefOfHar = "testsai1";
 
@@ -18,7 +18,7 @@ public class HTTPArchiveHelper {
 
         Gson gson = new Gson();
 
-        HTTPArchive harGson = gson.fromJson(harObject, HTTPArchive.class);
+        Har harGson = gson.fromJson(harObject, Har.class);
 
         //Get appropriate entry from Entries list based on pageRef parameter
         List<Entries> entries = harGson.getLog().getEntries();

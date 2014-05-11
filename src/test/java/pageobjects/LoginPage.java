@@ -1,7 +1,6 @@
 package pageobjects;
 
-import com.saisantoshiinfotech.BasePage;
-import com.saisantoshiinfotech.Driver;
+import selenium.Driver;
 
 
 public class LoginPage extends BasePage {

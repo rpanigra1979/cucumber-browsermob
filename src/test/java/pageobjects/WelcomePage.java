@@ -1,8 +1,7 @@
 package pageobjects;
 
-import com.saisantoshiinfotech.BasePage;
-import com.saisantoshiinfotech.Driver;
-import com.saisantoshiinfotech.SeleniumUtilities;
+import selenium.Driver;
+import selenium.Selenium;
 
 
 public class WelcomePage extends BasePage {
@@ -14,12 +13,12 @@ public class WelcomePage extends BasePage {
     private static final String LOGOUT_CSS = "a[href*='logout']";
     private static final String MEMBERS_AREA_CONTAINER_CSS = "div[id='homepage-members-area']";
     private static final String WELCOME_MESSAGE_CSS = "section[class='which-product-summary'] h2";
-    private SeleniumUtilities selenium;
+    private Selenium selenium;
 
     public WelcomePage(Driver webDriver) {
         super(webDriver);
         this.webDriver = webDriver;
-        selenium = new SeleniumUtilities(webDriver);
+        selenium = new Selenium(webDriver);
         waitForPageToLoad();
     }
 

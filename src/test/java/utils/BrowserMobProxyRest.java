@@ -1,4 +1,4 @@
-package com.saisantoshiinfotech;
+package utils;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -28,36 +28,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 
-public class BrowserMobProxy {
+public class BrowserMobProxyRest {
 
     private static String getFormattedEndpoint(String endPoint) {
         if (endPoint.endsWith("/")) {
             endPoint.subSequence(0, endPoint.length() - 2);
         }
         return endPoint;
-    }
-
-
-    public static void createHar(String endPoint) throws ClientProtocolException, IOException {
-
-        DefaultHttpClient httpclient = new DefaultHttpClient();
-        try {
-
-            HttpPut httpput = new HttpPut(getFormattedEndpoint(endPoint) + "/har");
-
-            HttpResponse response = httpclient.execute(httpput);
-
-            System.out.println(response.toString());
-
-            for (Header header : response.getAllHeaders()) {
-                System.out.println(header);
-            }
-        } finally {
-            // When HttpClient instance is no longer needed,
-            // shut down the connection manager to ensure
-            // immediate deallocation of all system resources
-            httpclient.getConnectionManager().shutdown();
-        }
     }
 
     public void createNewPageForHar(String endPoint, String pageRef) throws ClientProtocolException, IOException {
@@ -69,11 +46,6 @@ public class BrowserMobProxy {
 
             HttpResponse response = httpclient.execute(httpput);
 
-            System.out.println(response.toString());
-
-            for (Header header : response.getAllHeaders()) {
-                System.out.println(header);
-            }
         } finally {
             // When HttpClient instance is no longer needed,
             // shut down the connection manager to ensure
@@ -121,22 +93,6 @@ public class BrowserMobProxy {
 
             responseBody = handler.handleResponse(response);
 
-//        	InputStream instream = entity.getContent();
-//        	try {
-//
-//        		BufferedReader reader = new BufferedReader(
-//        				new InputStreamReader(instream));
-//        		har = reader.readLine();
-////        		System.out.println(har);
-//        	} catch (IOException ex) {
-//        		throw ex;
-//
-//        	} catch (RuntimeException ex) {
-//        		throw ex;
-//
-//        	}
-//
-//            EntityUtils.consume(entity);
         } catch (IOException e) {
 
         } finally {
@@ -159,14 +115,6 @@ public class BrowserMobProxy {
 
             System.out.println(response.toString());
 
-//            if (!response.toString().contains("200 OK")){
-//            	throw new Error("Damn, couldn't get har!");
-//            }
-
-//            for (Header header: response.getAllHeaders()) {
-//            	System.out.println(header);
-//             }
-
             HttpEntity entity = response.getEntity();
 
             InputStream instream = entity.getContent();
@@ -175,7 +123,7 @@ public class BrowserMobProxy {
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(instream));
                 har = reader.readLine();
-//        		System.out.println(har);
+
             } catch (IOException ex) {
                 throw ex;
 
@@ -211,11 +159,6 @@ public class BrowserMobProxy {
             }
 
             HttpResponse response = httpclient.execute(httpget);
-
-
-//            if (!response.toString().contains("200 OK")){
-//            	throw new Error("Get request failed with an error!");
-//            }
 
             ResponseHandler<String> handler = new BasicResponseHandler();
 

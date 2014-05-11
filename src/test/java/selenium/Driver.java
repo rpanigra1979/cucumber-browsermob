@@ -1,4 +1,4 @@
-package com.saisantoshiinfotech;
+package selenium;
 
 import net.lightbody.bmp.proxy.ProxyServer;
 import org.openqa.selenium.Capabilities;

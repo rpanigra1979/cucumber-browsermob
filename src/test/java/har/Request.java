@@ -1,4 +1,4 @@
-package HTTPArchive;
+package har;
 
 import java.util.List;
 

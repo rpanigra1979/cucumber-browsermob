@@ -1,12 +1,15 @@
 package stepdefinitions;
 
 
-import com.saisantoshiinfotech.*;
-import HTTPArchive.HTTPArchiveHelper;
+import har.HarHelper;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pageobjects.BasePage;
 import pageobjects.LoginPage;
+import selenium.Driver;
+import utils.BrowserMobProxyRest;
+import utils.PatternHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +23,8 @@ public class TrackingStepDefinitions {
     private BasePage page;
     private LoginPage loginPage;
     private String har, pageRef;
-    private BrowserMobProxy proxy = new BrowserMobProxy();
-    private HTTPArchiveHelper harUtil = new HTTPArchiveHelper();
+    private BrowserMobProxyRest proxy = new BrowserMobProxyRest();
+    private HarHelper harUtil = new HarHelper();
 
 
     private static final String GOOGLE_ANALYTICS_URL;
@@ -71,17 +74,17 @@ public class TrackingStepDefinitions {
 
     @Then("^the clickout event (.*) should be fired$")
     public void the_clickout_event_should_get_fired(String value) throws Throwable {
-        Pattern eventPattern = PatternUtilities.getPattern("5\\(Clickout - Which [eE]xit\\*" + value);
+        Pattern eventPattern = PatternHelper.getPattern("5\\(Clickout - Which [eE]xit\\*" + value);
         assertTrue("Wrong values for exit link event fired!"
-                + eventPattern, PatternUtilities.ifListContainsPattern(getParameterValueListForUtme(), eventPattern));
+                + eventPattern, PatternHelper.ifListContainsPattern(getParameterValueListForUtme(), eventPattern));
     }
 
     @Then("^the custom variable (.*) with the value (.*) should be set")
     public void the_custom_variable_should_be_fired(String variable, String value) throws Throwable {
 
-        Pattern eventPattern = PatternUtilities.getPattern("" + variable + ".*" + value);
+        Pattern eventPattern = PatternHelper.getPattern("" + variable + ".*" + value);
         assertTrue("custom variable '" + variable + "' was not fired!"
-                + eventPattern, PatternUtilities.ifListContainsPattern(getParameterValueListForUtme(), eventPattern));
+                + eventPattern, PatternHelper.ifListContainsPattern(getParameterValueListForUtme(), eventPattern));
     }
 
     private List<String> getParameterValueListForUtme() throws Exception {
@@ -92,7 +95,7 @@ public class TrackingStepDefinitions {
 
         List<String> listOfUtmeEvents = new ArrayList<String>();
 
-        har = BrowserMobProxy.getHar(PROXY_URL);
+        har = BrowserMobProxyRest.getHar(PROXY_URL);
 
         listOfUtmeEvents.addAll(harUtil.getValueOfParameter("utme", harUtil.getRequestListForGoogleAnalyticsUrl(har, pageRef, GOOGLE_ANALYTICS_URL)));
         listOfUtmeEvents.addAll(harUtil.getValueOfParameter("utme", harUtil.getRequestListForGoogleAnalyticsUrl(har, pageRef, GOOGLE_ANALYTICS_SSL_URL)));

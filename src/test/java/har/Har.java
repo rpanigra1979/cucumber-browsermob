@@ -1,6 +1,6 @@
-package HTTPArchive;
+package har;
 
-public class HTTPArchive {
+public class Har {
 
     private Log log;
 

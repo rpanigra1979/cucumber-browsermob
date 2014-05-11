@@ -1,13 +1,15 @@
-package com.saisantoshiinfotech;
+package pageobjects;
 
 
+import selenium.Driver;
+import selenium.Selenium;
 import org.joda.time.DateTime;
 
 import static org.junit.Assert.assertTrue;
 
 
 public class BasePage {
-    private SeleniumUtilities selenium;
+    private Selenium selenium;
 
     private static final String HOST = "which.co.uk";
     private static final String HOMEPAGE_URL = "www." + HOST;
@@ -15,7 +17,7 @@ public class BasePage {
 
 
     public BasePage(final Driver webDriver) {
-        selenium = new SeleniumUtilities(webDriver);
+        selenium = new Selenium(webDriver);
     }
 
     public void enterIntoInputField(String cssLocator, String charSequence) {
